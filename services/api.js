@@ -15,6 +15,13 @@ const registerPatient = async (patient) => {
     return {msg};
 }
 
+const getPsychiatrist = async (id) => {
+    const result = await db.query(`
+        select * from Psychiatrist where id = ${id}
+    `)
+    return result;
+}
+
 const getHospitalSummary = async (id) => {
     const hospital = await db.query(`
         select H.id, H.name, T2.total_patients, T2.id as psy_id, T2.name as psy_name, T2.patient_counts
@@ -40,5 +47,6 @@ const getHospitalSummary = async (id) => {
 
 module.exports = {
     getHospitalSummary,
-    registerPatient
+    registerPatient,
+    getPsychiatrist
 }

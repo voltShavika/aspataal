@@ -3,7 +3,7 @@ const multer = require("multer")
 const {checkSchema, validationResult} = require('express-validator');
 const {uploadSingleFile} = require("../helper")
 
-const { getHospitalSummary, registerPatient } = require("../services/api");
+const { getHospitalSummary, registerPatient, getPsychiatrist } = require("../services/api");
 
 const router = express.Router();
 
@@ -66,12 +66,29 @@ const PatientFormSchema = {
             minNumbers: 1
         },
         errorMessage: "Password should be min 8 characters and maximum 15. Should have a upper case, a lower case, a number and a symbol"
+    },
+    psychiatrist_id: {
+        custom: {
+            options: async id => {
+                try{
+                    const results = await getPsychiatrist(id);
+                    console.log("Results", results);
+                    if(results.length < 1){
+                        return Promise.reject("Please enter valid psychiatrist id")
+                    }
+                    return false;
+                }
+                catch(e) {
+                    return Promise.reject("Please enter valid psychiatrist id");
+                }
+            }
+        },
+        errorMessage: "Please enter valid psychiatrist id"
     }
 
 }
 
 router.post("/register", (req, res, next) => {
-    console.log("------------------");
     uploadSingleFile(req, res, async (fileError) => {
         let errors = [];
         if(fileError){
@@ -86,12 +103,13 @@ router.post("/register", (req, res, next) => {
             console.log(req.body);
             await Promise.all(checkSchema(PatientFormSchema).map(chain => chain.run(req)));
             errors = errors.concat(validationResult(req).array());
-            console.log(errors);
             if(errors.length > 0){
                 return res.status(400).json({
                     errors: errors.map(v => v.msg)
                 })
             }
+
+            req.body.photo = '/public/' + req.file.filename;
             return res.status(201).json(await registerPatient(req.body))
         }
         catch(e) {
