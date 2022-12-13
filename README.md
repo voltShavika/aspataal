@@ -84,4 +84,8 @@ Check the Http response code:
 
 I have included the database dump at `./database/aspataal.sql`
 
+#### Postman collection
+
+https://api.postman.com/collections/24901038-7bb333e4-48bb-41df-a9c1-f4f2b9d674d0?access_key=PMAT-01GM5G9RTHB7SA79FHK5H83GWM
+
 
