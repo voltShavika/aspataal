@@ -11,7 +11,7 @@ router.post("/hospital", async (req, res, next) => {
     try{
         console.log(req.body);
         const rows  = await getHospitalSummary(parseInt(req.body.id));
-        if(rows.length > 1){
+        if(rows.length > 0){
             const data = {
                 hospital_name: rows[0].name,
                 hospital_id: rows[0].id,
