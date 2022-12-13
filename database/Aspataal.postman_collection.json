@@ -1,0 +1,95 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Aspataal",
+		"_postman_id": "b68dcfb7-d639-9de9-2921-7e32307377ad",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8000/api/hospital",
+			"request": {
+				"url": "http://localhost:8000/api/hospital",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 3\n}"
+				},
+				"description": "Get Hospital details"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/register",
+			"request": {
+				"url": "http://localhost:8000/api/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Shavika Mittal",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "+918756565698",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "shavika619@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "C-171A Surya Nagar",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Test@1234",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "psychiatrist_id",
+							"value": "5",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"value": "",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"description": "Register a new patient"
+			},
+			"response": []
+		}
+	]
+}
